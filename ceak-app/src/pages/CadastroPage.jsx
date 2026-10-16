@@ -190,8 +190,8 @@ export default function CadastroPage() {
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-800">Novo Aluno</h1>
           <p className="text-sm text-slate-500">Cadastre os dados pessoais, turma, limite diário e restrições alimentares</p>
         </div>
-        <span className={`badge self-start sm:self-auto ${modoDemo ? 'bg-brand-red text-white' : 'bg-emerald-100 text-emerald-800'}`}>
-          {modoDemo ? 'Modo Demo' : 'Supabase Conectado'}
+        <span className="self-start sm:self-auto rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+          Ficha Cadastral
         </span>
       </div>
 

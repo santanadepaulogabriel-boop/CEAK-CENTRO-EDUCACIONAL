@@ -8,18 +8,170 @@ export const CATEGORIAS = [
   { id: 'pratos', nome: 'Pratos & Especiais', emoji: '🍝' },
 ];
 
-export const PRODUTOS = [
-  { nome: 'Misto-Quente', preco: 6.0, emoji: '🥪', categoria: 'salgados' },
-  { nome: 'Pizza', preco: 8.0, emoji: '🍕', categoria: 'salgados' },
-  { nome: 'Salgado Assado', preco: 7.0, emoji: '🥟', categoria: 'salgados' },
-  { nome: 'Burger Artesanal', preco: 19.9, emoji: '🍔', categoria: 'salgados' },
-  { nome: 'Refrigerante', preco: 5.0, emoji: '🥤', categoria: 'bebidas' },
-  { nome: 'Coca-Cola Juninho', preco: 4.5, emoji: '🍾', categoria: 'bebidas' },
-  { nome: 'Suco', preco: 6.5, emoji: '🍊', categoria: 'bebidas' },
-  { nome: 'Água Mineral', preco: 3.0, emoji: '💧', categoria: 'bebidas' },
-  { nome: 'Bolo de Cenoura', preco: 8.5, emoji: '🍰', categoria: 'doces' },
-  { nome: 'Lasanha', preco: 16.9, emoji: '🍝', categoria: 'pratos' },
+export const PRODUTOS_PADRAO = [
+  {
+    id: 'p1',
+    nome: 'Lasanha à Bolonhesa',
+    descricao: 'Massa fresca artesanal, molho suculento e queijo gratinado.',
+    preco: 16.9,
+    emoji: '🍝',
+    ilustracao: 'lasanha',
+    corFundo: 'bg-amber-50',
+    categoria: 'pratos',
+    tag: 'Especial do Chef',
+  },
+  {
+    id: 'p2',
+    nome: 'Burger Artesanal Especial',
+    descricao: 'Pão brioche fofinho, hambúrguer caseiro, cheddar cremoso e alface.',
+    preco: 19.9,
+    emoji: '🍔',
+    ilustracao: 'burger',
+    corFundo: 'bg-orange-50',
+    categoria: 'pratos',
+    tag: 'Mais Pedido',
+  },
+  {
+    id: 'p3',
+    nome: 'Bolo de Cenoura com Chocolate',
+    descricao: 'Fatia generosa com cobertura aveludada de chocolate puro.',
+    preco: 8.5,
+    emoji: '🍰',
+    ilustracao: 'bolo',
+    corFundo: 'bg-rose-50',
+    categoria: 'doces',
+    tag: 'Sobremesa',
+  },
+  {
+    id: 'p4',
+    nome: 'Salgado Assado Dourado',
+    descricao: 'Assado folhado artesanal quentinho (frango com requeijão ou queijo).',
+    preco: 7.0,
+    emoji: '🥟',
+    ilustracao: 'coxinha',
+    corFundo: 'bg-amber-50',
+    categoria: 'salgados',
+    tag: 'Quentinho',
+  },
+  {
+    id: 'p5',
+    nome: 'Misto-Quente no Brioche',
+    descricao: 'Pão tostado na chapa com queijo derretido e presunto magro.',
+    preco: 6.0,
+    emoji: '🥪',
+    ilustracao: 'misto',
+    corFundo: 'bg-yellow-50',
+    categoria: 'salgados',
+  },
+  {
+    id: 'p6',
+    nome: 'Fatia de Pizza Margherita',
+    descricao: 'Molho de tomate fresco, mozzarella derretida e orégano.',
+    preco: 8.0,
+    emoji: '🍕',
+    ilustracao: 'pizza',
+    corFundo: 'bg-red-50',
+    categoria: 'salgados',
+  },
+  {
+    id: 'p7',
+    nome: 'Suco Natural de Laranja',
+    descricao: 'Espremido na hora, 100% fruta natural e bem gelado 350ml.',
+    preco: 6.5,
+    emoji: '🍊',
+    ilustracao: 'suco',
+    corFundo: 'bg-orange-50',
+    categoria: 'bebidas',
+    tag: '100% Natural',
+  },
+  {
+    id: 'p8',
+    nome: 'Refrigerante Gelado',
+    descricao: 'Lata 350ml servida estupidamente gelada.',
+    preco: 5.0,
+    emoji: '🥤',
+    ilustracao: 'refri',
+    corFundo: 'bg-blue-50',
+    categoria: 'bebidas',
+  },
+  {
+    id: 'p9',
+    nome: 'Coca-Cola Juninho',
+    descricao: 'Garrafinha 200ml gelada na medida certa.',
+    preco: 4.5,
+    emoji: '🍾',
+    ilustracao: 'coca',
+    corFundo: 'bg-red-50',
+    categoria: 'bebidas',
+  },
+  {
+    id: 'p10',
+    nome: 'Água Mineral Crystal 500ml',
+    descricao: 'Água mineral límpida com ou sem gás.',
+    preco: 3.0,
+    emoji: '💧',
+    ilustracao: 'agua',
+    corFundo: 'bg-cyan-50',
+    categoria: 'bebidas',
+  },
+  {
+    id: 'p11',
+    nome: 'Brownie com Nozes',
+    descricao: 'Massa úmida de chocolate nobre com nozes crocantes.',
+    preco: 7.5,
+    emoji: '🍫',
+    ilustracao: 'brownie',
+    corFundo: 'bg-amber-100/50',
+    categoria: 'doces',
+  },
+  {
+    id: 'p12',
+    nome: 'Pão de Queijo Mineiro',
+    descricao: 'Tradicional pão de queijo quentinho e crocante por fora.',
+    preco: 5.0,
+    emoji: '🧀',
+    ilustracao: 'paodequeijo',
+    corFundo: 'bg-yellow-50',
+    categoria: 'salgados',
+  },
 ];
+
+/**
+ * Busca produtos dinamicamente da tabela 'produtos' do Supabase.
+ * Se a tabela estiver vazia ou não criada, utiliza o catálogo padrão com elegância.
+ */
+export async function buscarProdutos() {
+  if (modoDemo || !supabase) {
+    return PRODUTOS_PADRAO;
+  }
+  try {
+    const { data, error } = await supabase
+      .from('produtos')
+      .select('*')
+      .order('nome');
+
+    if (error || !data || data.length === 0) {
+      if (error) {
+        console.warn('Tabela "produtos" ainda não criada ou inacessível no Supabase. Carregando catálogo padrão.', error.message);
+      }
+      return PRODUTOS_PADRAO;
+    }
+
+    return data.map((item) => ({
+      id: item.id,
+      nome: item.nome,
+      descricao: item.descricao || '',
+      preco: Number(item.preco),
+      categoria: item.categoria || 'salgados',
+      emoji: item.emoji || '🥪',
+      img: item.imagem_url || item.img || null,
+      tag: item.tag || null,
+    }));
+  } catch (err) {
+    console.warn('Erro ao conectar na tabela produtos do Supabase:', err);
+    return PRODUTOS_PADRAO;
+  }
+}
 
 // ---- Modo demonstração (sem Supabase configurado): dados em memória ----
 const demoAlunos = [
